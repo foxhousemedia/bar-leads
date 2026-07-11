@@ -556,8 +556,6 @@ section[id],main[id]{scroll-margin-top:84px}
 .preloader.is-done{transform:translateY(-101%)}
 .preloader.is-done .preloader__inner{opacity:0;transform:translateY(-40px)}
 body.is-loading{overflow:hidden}
-body.is-loading .line-mask>span{transform:translateY(110%) !important}
-body.is-loading .reveal{opacity:0 !important;transform:translateY(28px) !important}
 
 /* line-mask headline reveal */
 .line-mask{display:block;overflow:hidden}
@@ -1046,6 +1044,11 @@ body.is-loading .reveal{opacity:0 !important;transform:translateY(28px) !importa
       if (!p) return;
       document.body.classList.remove('is-loading');
       p.classList.add('is-done');
+      if (location.hash) {
+        var t = document.querySelector(location.hash);
+        if (t) t.scrollIntoView();
+      }
+      window.dispatchEvent(new Event('preloader:done'));
       setTimeout(function(){ p.remove(); }, 1200);
     }, wait);
   }

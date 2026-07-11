@@ -22,7 +22,13 @@
       if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
     }
   }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
-  document.querySelectorAll('.reveal, .line-mask, .section-title, h1').forEach(el => io.observe(el));
+  const startObserving = () => document.querySelectorAll('.reveal, .line-mask, .section-title, h1').forEach(el => io.observe(el));
+  if (document.body.classList.contains('is-loading')) {
+    addEventListener('preloader:done', startObserving, { once: true });
+    setTimeout(startObserving, 4000); // safety net if preloader script ever fails
+  } else {
+    startObserving();
+  }
 
   /* ── count-up stats ── */
   const fmt = new Intl.NumberFormat('en-US');
