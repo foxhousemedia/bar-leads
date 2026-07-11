@@ -92,12 +92,36 @@
   const form = document.getElementById('qualify-form');
   const thanks = document.getElementById('qualify-thanks');
   if (form) {
-    form.addEventListener('submit', (e) => {
+    const note = form.querySelector('.form__note');
+    const noteText = note ? note.textContent : '';
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
-      form.style.display = 'none';
-      thanks.hidden = false;
-      thanks.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true; btn.style.opacity = '.6';
+      try {
+        const r = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            venue: document.getElementById('f-venue').value,
+            city: document.getElementById('f-city').value,
+            type: document.getElementById('f-type').value,
+            email: document.getElementById('f-email').value
+          })
+        });
+        if (!r.ok) throw new Error('status ' + r.status);
+        form.style.display = 'none';
+        thanks.hidden = false;
+        thanks.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (err) {
+        btn.disabled = false; btn.style.opacity = '';
+        if (note) {
+          note.textContent = "Something hiccuped sending that — try again, or email us directly.";
+          note.style.color = '#e8890c';
+          setTimeout(() => { note.textContent = noteText; note.style.color = ''; }, 6000);
+        }
+      }
     });
   }
 })();
