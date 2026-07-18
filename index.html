@@ -882,6 +882,12 @@ body.is-loading{overflow:hidden}
   /* triangle mosaic (svg) — muted into near-black */
   background:linear-gradient(rgba(14,13,11,.62),rgba(14,13,11,.62)),#16130f url("assets/19c08262.svg") center/300px auto;
 }
+.quotes__video{
+  max-width:33%;margin:0 auto 40px;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--line);background:var(--bg-2);
+}
+.quotes__video-frame{padding:56.25% 0 0 0;position:relative}
+.quotes__video-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%}
 .quotes__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .quote{
   position:relative;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);
@@ -895,7 +901,7 @@ body.is-loading{overflow:hidden}
 }
 .quote footer b{display:block;font-size:14px}
 .quote footer span{font-size:12.5px;color:var(--faint)}
-@media(max-width:860px){.quotes__grid{grid-template-columns:1fr}}
+@media(max-width:860px){.quotes__grid{grid-template-columns:1fr}.quotes__video{max-width:100%}}
 
 /* ── faq ─────────────────────────────────── */
 .faq{padding:clamp(70px,9vw,130px) 0;background:var(--bg-2);border-block:1px solid var(--line)}
@@ -1391,6 +1397,9 @@ body.is-loading{overflow:hidden}
   <section class="quotes">
     <div class="wrap">
       <h2 class="section-title section-title--center"><span class="line-mask"><span>Happy <em>owners.</em></span></span></h2>
+      <div class="quotes__video reveal">
+        <div class="quotes__video-frame"><iframe src="https://player.vimeo.com/video/1210947173?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="LightHouse-Testimonial"></iframe></div>
+      </div>
       <div class="quotes__grid">
         <blockquote class="quote spotlight reveal">
           <p>"Working with Bar Leads was fast, easy, professional, and a game changer for our venues. It's a popular attraction that keeps people in the building — and it creates brand equity every time a guest brings their photo strip home. They love the video that hits their inbox after the session."</p>
