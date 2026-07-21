@@ -651,8 +651,30 @@ body.is-loading{overflow:hidden}
 .strip__foot small{display:block;font-family:var(--font-mono);font-weight:400;font-size:7px;letter-spacing:.14em;color:#9b968c;margin-top:3px}
 .strip--hero{position:absolute;right:-18px;bottom:-24px;transform:rotate(5deg);z-index:2}
 .strip--hero:hover{transform:rotate(0deg) translateY(-10px) scale(1.05)}
-.strip--takeaway{position:absolute;left:-26px;bottom:-30px;transform:rotate(-5deg);z-index:2}
-.strip--takeaway:hover{transform:rotate(0deg) translateY(-10px) scale(1.05)}
+/* iPhone mockup — the emailed GIF, cycling like the real booth output */
+.phone{
+  position:absolute;left:-26px;bottom:-30px;width:190px;z-index:2;
+  aspect-ratio:9/19.5;border-radius:30px;background:#0b0b0d;
+  border:2.5px solid #4c4c54;box-shadow:0 24px 60px -12px rgba(0,0,0,.7),inset 0 0 0 2px #17171b;
+  transform:rotate(-5deg);transition:transform .6s var(--ease-spring);
+  overflow:hidden;padding:12px 10px;display:flex;align-items:center;
+}
+.phone:hover{transform:rotate(0deg) translateY(-10px) scale(1.05)}
+.phone::before{ /* dynamic island */
+  content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);
+  width:46px;height:13px;border-radius:8px;background:#000;box-shadow:inset 0 0 0 1px #232327;z-index:3;
+}
+.phone__card{width:100%;border-radius:8px;overflow:hidden;box-shadow:0 10px 30px -8px rgba(0,0,0,.8)}
+.phone__gif{position:relative;aspect-ratio:1}
+.phone__gif span{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;animation:phonegif 1.8s steps(1) infinite}
+.phone__gif span:nth-child(2){animation-delay:.6s}
+.phone__gif span:nth-child(3){animation-delay:1.2s}
+@keyframes phonegif{0%,32%{opacity:1}33%,100%{opacity:0}}
+.phone__brand{
+  background:#faf8f4;text-align:center;padding:9px 4px 11px;color:#121110;
+  font-family:var(--font-display);font-weight:800;font-size:10px;letter-spacing:.08em;
+}
+.phone__brand small{display:block;font-family:var(--font-mono);font-weight:400;font-size:7px;letter-spacing:.16em;color:#9b968c;margin-top:3px}
 
 /* animated gif chip */
 .gifchip{
@@ -671,7 +693,7 @@ body.is-loading{overflow:hidden}
 .gifchip__vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 @media(max-width:1060px){.gifchip{left:-8px}}
 @media(max-width:640px){.gifchip{width:180px}}
-@media(max-width:640px){.strip--hero{right:4px}.strip--takeaway{left:4px}}
+@media(max-width:640px){.strip--hero{right:4px}.phone{left:4px;width:150px}}
 
 /* ── logo marquee ────────────────────────── */
 .logos{padding:34px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -1277,13 +1299,16 @@ body.is-loading{overflow:hidden}
         <figure class="takeaway__photo tilt">
           <img src="assets/1cd7fba0.webp" alt="Guest holding two branded photo strips" loading="lazy">
         </figure>
-        <div class="strip strip--takeaway" aria-hidden="true">
-          <div class="strip__frames">
-            <span style="background-image:url(&quot;assets/lighthouse-strip-1.webp&quot;)"></span>
-            <span style="background-image:url(&quot;assets/lighthouse-strip-2.webp&quot;)"></span>
-            <span style="background-image:url(&quot;assets/lighthouse-strip-3.webp&quot;)"></span>
+        <!-- the emailed GIF, playing on an iPhone -->
+        <div class="phone" aria-hidden="true">
+          <div class="phone__card">
+            <div class="phone__gif">
+              <span style="background-image:url(&quot;assets/lighthouse-strip-1.webp&quot;)"></span>
+              <span style="background-image:url(&quot;assets/lighthouse-strip-2.webp&quot;)"></span>
+              <span style="background-image:url(&quot;assets/lighthouse-strip-3.webp&quot;)"></span>
+            </div>
+            <div class="phone__brand">THE GILDED LENS<small>EST · 1920</small></div>
           </div>
-          <div class="strip__foot">YOUR BAR<small>SAT · 07.02</small></div>
         </div>
       </div>
       <div>
